@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Просмотр и редактирование заявки{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-4">
+            <img src="{{ task_data.image.url }}" style="width: 100%;"/>
+        </div>
+        <div class="col-8">
+            <form action="{% url 'task:change_task' task_data.id %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form layout='horizontal' %}
+                {% if user.is_superuser %}
+                    {% buttons %}
+                        <a class="btn btn-link" href="{% url 'task:get_task' %}">Вернутся к списку</a>
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px; text-align: right">
+                            Сохранить
+                        </button>
+                    {% endbuttons %}
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

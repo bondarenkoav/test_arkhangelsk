@@ -1,0 +1,69 @@
+{% load staticfiles bootstrap4 %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link rel="icon" href="{% static "static/images/favicon.ico" %}">
+
+        <title>Пользовательская форма</title>
+
+        <script src="{% static "static/js/jquery-1.12.4.js" %}"></script>
+        <script src="{% static "static/js/bootstrap.min.js" %}"></script>
+        <link href="{% static "static/css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "static/css/font-awesome.min.css" %}" rel="stylesheet">
+
+        <!-- DataTables -->
+        <link rel="stylesheet" href="{% static "static/css/dataTables.bootstrap4.min.css" %}">
+        <script type="text/javascript" src="{% static "static/js/jquery.dataTables.min.js" %}"></script>
+        <script type="text/javascript" src="{% static 'static/js/dataTables.bootstrap4.min.js' %}"></script>
+
+        <script type="text/javascript">
+            function loadPage(){
+                document.getElementById('btn_submit').disabled=true;
+                document.getElementById('btn_preview').disabled=true;
+            }
+            function migrateDataTask(){
+                var user_name = document.getElementById('id_user_name').value;
+                var user_email = document.getElementById('id_user_email').value;
+                var text = document.getElementById('id_text').value;
+                if(user_name!='' && user_email!='' && text!=''){
+                    $("span#id_modal_name_user").text(user_name);
+                    $("span#id_modal_email_user").text(user_email);
+                    $("span#id_modal_text_user").text(text);
+                    document.getElementById('btn_submit').disabled=false;
+                    document.getElementById('btn_preview').disabled=false;
+                }
+            }
+            $(document).ready(function(){
+                $('#sortTable').DataTable();
+            });
+        </script>
+        <style>
+            .center {
+                width: 500px; /* Ширина элемента в пикселах */
+                padding: 10px; /* Поля вокруг текста */
+                margin: auto; /* Выравниваем по центру */
+            }
+        </style>
+    </head>
+
+    <body class="bg-light" onload="loadPage()">
+
+        <div class="container-fluid">
+            <div>
+                <h1>{% block title %}{% endblock %}</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

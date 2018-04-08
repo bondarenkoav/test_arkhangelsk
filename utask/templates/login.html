@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load staticfiles admin_static bootstrap4 %}
+
+        {% block content %}
+            <div class="container">
+                <div class="center">
+                        <div class="panel-heading">
+                            <h1 class="form-signin-heading" style="text-align: center">Авторизация</h1>
+                        </div>
+                        <form role="form" action="{% url 'login' %}" method="post">
+                            <div class="panel-body">
+                                {% csrf_token %}
+                                {% bootstrap_form form layout='horizontal' %}
+                            </div>
+                            <div class="panel-footer text-right">
+                                {% buttons %}
+                                    <button type="submit" class="btn btn-primary btn-lg">Войти</button>
+                                {% endbuttons %}
+                            </div>
+                        </form>
+                </div>
+            </div>
+        {% endblock %}
